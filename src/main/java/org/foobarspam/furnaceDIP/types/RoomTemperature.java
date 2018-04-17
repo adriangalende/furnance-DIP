@@ -6,11 +6,9 @@ import com.google.inject.Singleton;
 public class RoomTemperature {
 	
 	private double temperature = 0;
-	private static RoomTemperature instance;
+	private static RoomTemperature instance=null;
 
-	private RoomTemperature(){
-		this.temperature = 15;		
-	}
+	private RoomTemperature(){}
 
 	public double getTemperature() {
 		return this.temperature;
@@ -25,11 +23,9 @@ public class RoomTemperature {
 	}
 
 	public static RoomTemperature getInstance(){
-		if (instance instanceof RoomTemperature){
-			return instance;
-		} else {
+		if (!(instance instanceof RoomTemperature)){
 			instance = new RoomTemperature();
-		}
+		} 
 		return instance;
 	}
 

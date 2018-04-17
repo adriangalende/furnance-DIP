@@ -20,12 +20,9 @@ public class App
         final double maxTemp = 21.0;
         
         RoomTemperature temperature = RoomTemperature.getInstance();
-
+        temperature.setTemperature(15);
+        
         assert temperature.getTemperature() == 15.0: "Error al leer la primera temp";
-
-        RoomTemperature temp2 = RoomTemperature.getInstance();
-        assert temp2.getTemperature() == 15.0: "Error al leer la 2 temperatura";
-
 
         Heater heater = new GasHeater();
         Thermometer thermometer = new RemoteCommandSensor();
@@ -33,11 +30,12 @@ public class App
         Regulator regulator = new Regulator();
         
         System.out.println( "Arrancando..." );
-        regulator.regulate(thermometer, heater, minTemp, maxTemp, temp2);
+        regulator.regulate(thermometer, heater, minTemp, maxTemp, temperature);
         
+        temperature = RoomTemperature.getInstance();
         Jedi yoda = new Jedi();
         System.out.println( "\nArrancando a Yoda: " );
-        regulator.regulate(thermometer, yoda, minTemp, maxTemp, temp2);
+        regulator.regulate(thermometer, yoda, minTemp, maxTemp, temperature);
         assert temperature.getTemperature() == 14.0 : "La temp debería ser 14.0";
         yoda.speak();
     }
