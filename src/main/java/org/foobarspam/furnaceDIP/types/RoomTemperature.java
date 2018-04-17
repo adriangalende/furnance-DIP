@@ -1,11 +1,15 @@
 package org.foobarspam.furnaceDIP.types;
 
+import com.google.inject.Singleton;
+	
+@Singleton
 public class RoomTemperature {
 	
 	private double temperature = 0;
-	
-	public RoomTemperature(double temperature){
-		this.temperature = temperature;
+	private static RoomTemperature instance;
+
+	private RoomTemperature(){
+		this.temperature = 15;		
 	}
 
 	public double getTemperature() {
@@ -18,6 +22,15 @@ public class RoomTemperature {
 	
 	public void incrementTemperature(double increment){
 		this.temperature += increment;
+	}
+
+	public static RoomTemperature getInstance(){
+		if (instance instanceof RoomTemperature){
+			return instance;
+		} else {
+			instance = new RoomTemperature();
+		}
+		return instance;
 	}
 
 }
